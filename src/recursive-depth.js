@@ -15,11 +15,9 @@ import { NotImplementedError } from '../extensions/index.js';
 export default class DepthCalculator {
   calculateDepth(arr) {
     let depth = 1;
-    const hasArray = (element) => Array.isArray(element);
 
-    while (arr.some(hasArray)) {
-      depth++;
-      arr = arr.flat();
+    if (arr.some((element) => Array.isArray(element))) {
+      depth += this.calculateDepth(arr.flat())
     }
 
     return depth;
